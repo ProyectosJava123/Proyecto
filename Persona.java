@@ -1,4 +1,4 @@
-package Proyecto;
+package GIT;
 
 public class Persona {
 	protected String nombre;

@@ -1,4 +1,4 @@
-package Proyecto;
+package GIT;
 
 public class Atracciones extends Establecimiento{
 	protected int duracion;
