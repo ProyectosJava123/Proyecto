@@ -10,11 +10,12 @@ public class CentroDeOcio {
 		String nombre, dni;
 		int veces=0;
 		boolean seguir = true;
+		boolean seguiratracciones = true;
 		
 		
-		Atracciones ArrayAtraccionesInfantiles [] = new Atracciones [3];
-		Atracciones ArrayAtraccionesAcuaticas [] = new Atracciones [3];
-		Atracciones ArrayAtraccionesClasicas [] = new Atracciones [3];
+		Establecimiento ArrayAtraccionesInfantiles [] = new Atracciones [3];
+		Establecimiento ArrayAtraccionesAcuaticas [] = new Atracciones [3];
+		Establecimiento ArrayAtraccionesClasicas [] = new Atracciones [3];
 		
 		
 		ArrayAtraccionesClasicas [0] = new Atracciones ("Noria",5,20, "La mejor atraccion del mundo",10, "1,50 ~ 1,90", "15~80");
@@ -37,13 +38,13 @@ public class CentroDeOcio {
 	    char sala1[][]=new char[tamaño][tamaño];     //Creo el array bidimensional de caracteres salacine2  
 	    sala1=crearsala(tamaño);                     //Llamo al metodo crearsala para el array salacine2
 		
-	    Teatro obra= new Teatro ("La bella y la bestia",35,25,"",6,"Romance");
-	    Teatro obra1= new Teatro ("Rey Leon",35,25,"",6,"Fantasía");
-	    
+	    Teatro obra= new Teatro ("La bella y la bestia",35,25,"Una conmovedora historia",6,"Romance");
+	    Teatro obra1= new Teatro ("Rey Leon",35,25,"Una conmovedora historia",6,"Fantasía");
 	    
 	    
 		do {
 			System.out.println("Elige establecimiento");
+			System.out.println(" ");
 			System.out.println("1.Parque de atracciones");
 			System.out.println("2.Teatro");
 			System.out.println("3.Museo");
@@ -63,7 +64,6 @@ public class CentroDeOcio {
 						System.out.println("***********************************************************");
 						
 						do{	
-							
 							System.out.println("Datos para la entrada");
 							
 							System.out.println(" ");
@@ -76,13 +76,8 @@ public class CentroDeOcio {
 							do{System.out.println("Introduce Altura");
 							altura=teclado.nextDouble();}
 							while(altura<1 && altura >1.90);
-							
-							do{
 							System.out.println("Introduce DNI");
 							dni=teclado.next();
-							
-							}while(!comprobarDni(dni));
-							
 							System.out.println(" ");
 						
 						ArrayPersona [veces] = new Persona(nombre, edad, altura, dni);
@@ -177,13 +172,12 @@ public class CentroDeOcio {
 									ArrayPersona[veces].setEntrada(ArrayAtraccionesAcuaticas[2].getPrecio());
 								}
 							}
-							
 						}
 						
 						do{
 						System.out.println("¿Quieres Pedir Otra Entrada?");
 						System.out.println("1 - SI");
-						System.out.println("1 - NO");
+						System.out.println("2 - NO");
 						opcion=teclado.next();
 						}while(!opcion.equals("1") && !opcion.equals("2"));
 						
@@ -191,14 +185,28 @@ public class CentroDeOcio {
 							veces++;
 						}
 						else if(opcion.equals("2")){
+							seguiratracciones=false;
+							MostrarInformacionDeClientes(ArrayPersona);
+						}
+						
+						}
+						while(seguiratracciones);
+						
+						do{
+							System.out.println("¿Quieres Pedir Entrada en Otro Establecimiento?");
+							System.out.println("1 - SI");
+							System.out.println("2 - NO");
+							opcion=teclado.next();
+							}while(!opcion.equals("1") && !opcion.equals("2"));
+						
+						if(opcion.equals("1")){
+							seguir=true;
+						}
+			
+						else if(opcion.equals("2")){
 							seguir=false;
 						}
-						}
-						while(seguir);
 						
-						MostrarInformacionDeClientes(ArrayPersona);
-						
-						seguir=true;
 						break;
 				
 				case "2":	do {
@@ -211,21 +219,11 @@ public class CentroDeOcio {
 								System.out.println("Introduce Edad");
 								edad=teclado.nextInt();
 									
-								do{System.out.println("Introduce Altura");
-								altura=teclado.nextDouble();}
-								while(altura<1 && altura >1.90);
-									
-								do{
 								System.out.println("Introduce DNI");
 								dni=teclado.next();
-									
-								}while(!comprobarDni(dni));
-									
-								System.out.println(" ");
 								
-								ArrayPersona [veces] = new Persona(nombre, edad, altura, dni);
-					
-					
+								System.out.println(" ");
+								ArrayPersona [veces] = new Persona(nombre, edad,dni);
 					
 								 System.out.println("¿Que obra de teatro quieres ver?");    //Menu de peliculas
 							     System.out.println("--------------------------");
@@ -329,8 +327,8 @@ public class CentroDeOcio {
 					
 							break;
 							
-				case "4":  seguir=false;
-					
+				case "4":  
+					seguir=false;
 							break;
 						
 				}		
@@ -350,60 +348,7 @@ public class CentroDeOcio {
 			
 		}
 		}
-	
-		public static boolean comprobarDni(String dniAComprobar){
-	    
-        // Array con las letras posibles del dni en su posición
-        char[] letraDni = {
-            'T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D',  'X',  'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E'
-        };  
-  
-        String num= "";
-        int ind = 0;  
-  
-        // boolean que nos indicara si es un dni correcto o no
-        boolean valido;
-  
-        // existen dnis con 7 digitos numericos, si fuese el caso
-        // le añado un cero al principio
-        if(dniAComprobar.length() == 8) {
-             dniAComprobar = "0" + dniAComprobar;
-        }
-  
-        // compruebo que el 9º digito es una letra
-        if (!Character.isLetter(dniAComprobar.charAt(8))) {
-             return false;  
-        }
-  
-        // compruebo su longitud que sea 9
-        if (dniAComprobar.length() != 9){   
-             return false;
-        }  
- 
-        // Compruebo que lo 8 primeros digitos sean numeros
-        for (int i=0; i<8; i++) {
-   
-             if(!Character.isDigit(dniAComprobar.charAt(i))){
-                   return false;    
-             }
-             // si es numero, lo recojo en un String
-             num += dniAComprobar.charAt(i);     
-        }
-  
-        // paso a int el string donde tengo el numero del dni
-        ind = Integer.parseInt(num);
-  
-        // calculo la posición de la letra en el array que corresponde a este dni
-        ind %= 23;
-  
-        // verifico que la letra del dni corresponde con la del array
-        if ((Character.toUpperCase(dniAComprobar.charAt(8))) != letraDni[ind]){
-        	System.out.println("dni incorrecto");
-             return false;
-       }  
-       // si el flujo de la funcion llega aquí, es que el dni es correcto
-       return true;
-   } // fin comprobar
+		
 	public static void Menu() {                                             //Método Menu de la pelicula especifica
 		System.out.println("1.- Ver estado de la Sala. v=vacio x=ocupado");
 		System.out.println("2.- Asignar lugar disponible");
@@ -455,11 +400,8 @@ public class CentroDeOcio {
 	        	
 	        	System.out.println("Lugar asignado a la fila "+fila+" y columna "+columna);  //Asigno la butaca que haya elegido el usuario
 	            mat[fila-1][columna-1]='x';
-	            
 	     }
 	    
 	    return mat;
 	}
-
 }
-

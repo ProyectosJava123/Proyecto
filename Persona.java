@@ -14,6 +14,12 @@ public class Persona {
 		this.altura=altura;
 		this.dni=dni;
 	}
+	
+	public Persona(String nombre, int edad, String dni){
+		this.nombre=nombre;
+		this.edad=edad;
+		this.dni=dni;
+	}
 
 	protected String getNombre() {
 		return nombre;
@@ -59,8 +65,8 @@ public class Persona {
 
 	@Override
 	public String toString() {
-		return "Cliente: " + nombre + ", edad=" + edad + ", altura:" + altura + ", peso:" + peso + ", dni:" + dni
-				+ ", Pagará como entrada: " + entrada + "]";
+		return "Entrada: " + nombre + ", edad=" + edad + ", altura:" + altura + ", peso:" + peso + ", dni:" + dni
+				+ ", Pagará como entrada: " + entrada + "€";
 	}
 	
 	
