@@ -38,9 +38,12 @@ public class CentroDeOcio {
 	    char sala1[][]=new char[tamaño][tamaño];     //Creo el array bidimensional de caracteres salacine2  
 	    sala1=crearsala(tamaño);                     //Llamo al metodo crearsala para el array salacine2
 		
-	    Teatro obra= new Teatro ("La bella y la bestia",35,25,"Una conmovedora historia","6","Romance");
-	    Teatro obra1= new Teatro ("Rey Leon",25,25,"Una conmovedora historia","6","Fantasía");
+	    Establecimiento ArrayObras [] = new Establecimiento[2];
+	    ArrayObras[0] = new Teatro ("La bella y la bestia",35,25,"Una conmovedora historia","6","Romance");
+	    ArrayObras[1] =	new Teatro ("Rey Leon",25,25,"Una conmovedora historia","6","Fantasía");	
 	    
+	   // Teatro obra= new Teatro ("La bella y la bestia",35,25,"Una conmovedora historia","6","Romance");
+	   // Teatro obra1= new Teatro ("Rey Leon",25,25,"Una conmovedora historia","6","Fantasía");
 	    
 		do {
 			System.out.println("Elige establecimiento");
@@ -227,12 +230,12 @@ public class CentroDeOcio {
 					
 								 System.out.println("¿Que obra de teatro quieres ver?");    //Menu de peliculas
 							     System.out.println("--------------------------");
-							     System.out.println("1."+ obra.getNombre()+ " Hora:"+ obra.getHora()+":00" +" precio:" +obra.getPrecio() +"€");
-							     System.out.println("2."+ obra1.getNombre()+ " Hora:"+ obra1.getHora()+":00" +" precio:" +obra1.getPrecio() +"€");
+							     System.out.println("1."+ ArrayObras[0].getNombre()+ " Hora:"+ ((Teatro) ArrayObras[0]).getHora()+":00" +" precio:" +ArrayObras[0].getPrecio() +"€");
+							     System.out.println("2."+ ArrayObras[1].getNombre()+ " Hora:"+ ((Teatro) ArrayObras[1]).getHora()+":00" +" precio:" +ArrayObras[1].getPrecio() +"€");
 							     System.out.println("--------------------------");
 							     opcion=teclado.nextLine();
 							     if (opcion.equals("1")) {
-								     ArrayPersona[veces].setEntrada(obra.getPrecio());
+								     ArrayPersona[veces].setEntrada(ArrayObras[0].getPrecio());
 								    	do{
 								     	Menu();                                                  //Llamo al metodo menu
 								        opcion=teclado.nextLine();
@@ -269,7 +272,7 @@ public class CentroDeOcio {
 								     seguir=true;                      //Vuelvo a declarar la variable booleana a true para poder volver a escoger pelicula e incluso la misma pelicula
 								     
 							     }else if(opcion.equals("2")) {
-							    	 ArrayPersona[veces].setEntrada(obra1.getPrecio());
+							    	 ArrayPersona[veces].setEntrada(ArrayObras[1].getPrecio());
 									    do{	
 							    	 		Menu();                                                //Llamo al metodo menu
 									        opcion=teclado.nextLine();
