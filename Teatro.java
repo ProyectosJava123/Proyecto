@@ -1,20 +1,20 @@
 package GIT;
 
 public class Teatro extends Establecimiento {
-	private int hora;
+	private String hora;
 	private String genero;
 	
-	public Teatro(String nombre, double precio, int aforo, String descripcion,int hora, String genero) {
+	public Teatro(String nombre, double precio, int aforo, String descripcion,String hora, String genero) {
 		super(nombre, precio, aforo, descripcion);
 		this.hora=hora;
 		this.genero=genero;
 	}
 	
-	protected double getHora() {
+	protected String getHora() {
 		return hora;
 	}
 
-	protected void setHora(int hora) {
+	protected void setHora(String hora) {
 		this.hora = hora;
 	}
 	

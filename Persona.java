@@ -69,6 +69,10 @@ public class Persona {
 				+ ", Pagará como entrada: " + entrada + "€";
 	}
 	
+	public String toStringTeatro() {
+		return "Entrada: " + nombre + ", edad=" + edad + ", dni:" + dni
+				+ ", Pagará como entrada: " + entrada + "€";
+	}
 	
 	
 }

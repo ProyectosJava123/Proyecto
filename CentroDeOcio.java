@@ -38,8 +38,8 @@ public class CentroDeOcio {
 	    char sala1[][]=new char[tamaño][tamaño];     //Creo el array bidimensional de caracteres salacine2  
 	    sala1=crearsala(tamaño);                     //Llamo al metodo crearsala para el array salacine2
 		
-	    Teatro obra= new Teatro ("La bella y la bestia",35,25,"Una conmovedora historia",6,"Romance");
-	    Teatro obra1= new Teatro ("Rey Leon",35,25,"Una conmovedora historia",6,"Fantasía");
+	    Teatro obra= new Teatro ("La bella y la bestia",35,25,"Una conmovedora historia","6","Romance");
+	    Teatro obra1= new Teatro ("Rey Leon",25,25,"Una conmovedora historia","6","Fantasía");
 	    
 	    
 		do {
@@ -196,7 +196,7 @@ public class CentroDeOcio {
 							System.out.println("¿Quieres Pedir Entrada en Otro Establecimiento?");
 							System.out.println("1 - SI");
 							System.out.println("2 - NO");
-							opcion=teclado.next();
+							opcion=teclado.next(); teclado.nextLine();
 							}while(!opcion.equals("1") && !opcion.equals("2"));
 						
 						if(opcion.equals("1")){
@@ -220,27 +220,28 @@ public class CentroDeOcio {
 								edad=teclado.nextInt();
 									
 								System.out.println("Introduce DNI");
-								dni=teclado.next();
+								dni=teclado.next(); teclado.nextLine();
 								
 								System.out.println(" ");
 								ArrayPersona [veces] = new Persona(nombre, edad,dni);
 					
 								 System.out.println("¿Que obra de teatro quieres ver?");    //Menu de peliculas
 							     System.out.println("--------------------------");
-							     System.out.println("1."+ obra.getNombre()+ " Hora:"+ obra.getHora()+":00");
-							     System.out.println("2."+ obra1.getNombre()+ " Hora:"+ obra1.getHora()+":00");
-							     System.out.println("3.Salir del Teatro");
+							     System.out.println("1."+ obra.getNombre()+ " Hora:"+ obra.getHora()+":00" +" precio:" +obra.getPrecio() +"€");
+							     System.out.println("2."+ obra1.getNombre()+ " Hora:"+ obra1.getHora()+":00" +" precio:" +obra1.getPrecio() +"€");
 							     System.out.println("--------------------------");
 							     opcion=teclado.nextLine();
 							     if (opcion.equals("1")) {
-								     do{
-								    	Menu();                                                  //Llamo al metodo menu
+								     ArrayPersona[veces].setEntrada(obra.getPrecio());
+								    	do{
+								     	Menu();                                                  //Llamo al metodo menu
 								        opcion=teclado.nextLine();
 								             
 								            switch(opcion){
-								                case "1": monitorTeatro(sala);                   //Muestro como esta la sala llamando al metodo monitocine
-								                        break;
-								                case "2": sala=asignarLugar(sala);         //El array sala es igual al método asignarLugar
+								                case "1": monitorTeatro(sala);  //Muestro como esta la sala llamando al metodo monitocine
+								                break;
+								                case "2": sala=asignarLugar(sala);
+								                          seguir=false;                            //El array sala es igual al método asignarLugar
 								                        break;
 								                case "3": do {
 								                	    System.out.print("Selecciona la fila:");     //Pido fila
@@ -257,23 +258,27 @@ public class CentroDeOcio {
 								            	        }
 								            	        }while(columna>tamaño || columna<=0);
 								                	    sala=escogerLugar(sala, fila, columna);   //El array sala es igual al metodo escogerLugar
-								                        break;                                             //donde el usuario escoge lugar especifico
+								                        seguir=false;
+								                	    break;                                             //donde el usuario escoge lugar especifico
 								                case "4": seguir=false;
 								                        break;
 								                default: System.out.println("Introduce numero correcto");;
 								            }
-								      }while(seguir);
+								    	}while(seguir);
+								      
 								     seguir=true;                      //Vuelvo a declarar la variable booleana a true para poder volver a escoger pelicula e incluso la misma pelicula
 								     
 							     }else if(opcion.equals("2")) {
-							    	  do{
-									    	Menu();                                                //Llamo al metodo menu
+							    	 ArrayPersona[veces].setEntrada(obra1.getPrecio());
+									    do{	
+							    	 		Menu();                                                //Llamo al metodo menu
 									        opcion=teclado.nextLine();
 									             
 									            switch(opcion){
 									                case "1": monitorTeatro(sala1);                 //Muestro como esta la sala2 llamando al metodo monitocine
 									                        break;
-									                case "2": sala1=asignarLugar(sala1);       //El array sala1 es igual al método asignarLugar
+									                case "2": sala1=asignarLugar(sala1);
+									                          seguir=false;                                //El array sala1 es igual al método asignarLugar
 									                        break;
 									                case "3": do {
 									                	    System.out.print("Selecciona la fila:");     //Pido fila
@@ -290,15 +295,17 @@ public class CentroDeOcio {
 									            	        }
 									            	        }while(columna>tamaño || columna<=0);
 									                	    sala1=escogerLugar(sala1, fila, columna);   //El array sala1 es igual al metodo escogerLugar
-									                        break;                                             //donde el usuario escoge lugar especifico
+									                        seguir=false;
+									                	    break;                                             //donde el usuario escoge lugar especifico
 									                case "4": seguir=false;
 									                        break;
 									                default: System.out.println("Introduce numero correcto");;
 									            }
-									      }while(seguir);
+									    }while(seguir);
+							    	  
 							    	  seguir=true;                 //Vuelvo a declarar la variable booleana a true para poder volver a escoger pelicula e incluso la misma pelicula
 							     }
-						     }while(opcion!="3");
+						     
 							
 							do{
 								System.out.println("¿Quieres Pedir Otra Entrada?");
@@ -315,12 +322,27 @@ public class CentroDeOcio {
 									seguir=false;
 								}
 								
-								while(seguir);
+								}while(seguir);
 								
-								MostrarInformacionDeClientes(ArrayPersona);
+								MostrarInformacionDeClientesTeatro(ArrayPersona);
 								
 								seguir=true;
-							
+								
+								do{
+									System.out.println("¿Quieres Pedir Entrada en Otro Establecimiento?");
+									System.out.println("1 - SI");
+									System.out.println("2 - NO");
+									opcion=teclado.next(); teclado.nextLine();
+									}while(!opcion.equals("1") && !opcion.equals("2"));
+								
+								if(opcion.equals("1")){
+									seguir=true;
+								}
+					
+								else if(opcion.equals("2")){
+									seguir=false;
+								}
+								
 							break;
 							
 				case "3":
@@ -348,6 +370,19 @@ public class CentroDeOcio {
 			
 		}
 		}
+		
+		public static void MostrarInformacionDeClientesTeatro(Persona ArrayPersona []){
+			
+			for(int x=0; x<ArrayPersona.length; x++){ //Recorremos el Array para mostrar la información de los clientes
+					
+					if(ArrayPersona[x]!=null){ //Mostrar los clientes que hayan sido introducidos y filtrar las posiciones vacías
+						System.out.println(" ");
+						System.out.println(ArrayPersona[x].toStringTeatro());	
+						System.out.println(" ");
+					}
+				
+			}
+			}
 		
 	public static void Menu() {                                             //Método Menu de la pelicula especifica
 		System.out.println("1.- Ver estado de la Sala. v=vacio x=ocupado");
