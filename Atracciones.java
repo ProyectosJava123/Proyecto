@@ -5,6 +5,7 @@ public class Atracciones extends Establecimiento{
 	protected String edad_recomendada;
 	protected String altura_recomendada;
 	
+	
 	public Atracciones(String nombre, double precio, int aforo, String descripcion, int duracion, String altura_recomendada, String edad_recomendada) {
 		super(nombre, precio, aforo, descripcion);
 		this.duracion = duracion;
